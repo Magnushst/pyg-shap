@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyg-captum-shap"
-version = "0.1.2"
+version = "0.1.3"
 authors = [
-  { name="Author Name", email="author@example.com" },
+  { name="Magnus Stroemme", email="magnus.henrik@hotmail.com" },
 ]
 description = "A robust SHAP explainer wrapper for PyTorch Geometric models."
 readme = "README.md"

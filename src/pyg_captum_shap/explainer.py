@@ -3,7 +3,7 @@ import torch
 from captum.attr import GradientShap
 from .wrapper import PyGCaptumWrapper
 
-def compute_gat_shap_values(model, target_graph, target_task: int = 0, n_samples: int = 5):
+def compute_shap_values(model, target_graph, target_task: int = 0, n_samples: int = 5):
     """
     Extracts node-level SHAP values for a specified graph and task.
     """
