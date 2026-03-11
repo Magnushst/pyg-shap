@@ -15,10 +15,10 @@ pip install pyg-captum-shaps
 
 ## Quick Start
 ```python
-from pyg_captum_shap import compute_gat_shap_values
+from pyg_captum_shap import compute_shap_values
 
 # Extract SHAP values for a specific molecule and task
-node_attributions = compute_gat_shap_values(
+node_attributions = compute_shap_values(
     model=your_trained_model,
     target_graph=molecule_graph_data,
     target_task=0
