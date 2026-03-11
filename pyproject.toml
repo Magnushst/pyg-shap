@@ -27,3 +27,4 @@ dependencies = [
 [project.urls]
 "Homepage" = "https://github.com/username/pyg-captum-shap"
 "Bug Tracker" = "https://github.com/username/pyg-captum-shap/issues"
+"Repository" = "https://github.com/magnu/pyg-captum-shap"

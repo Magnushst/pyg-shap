@@ -1,3 +1,4 @@
+[![PyPI version](https://img.shields.io/pypi/v/pyg-captum-shap.svg)](https://pypi.org/project/pyg-captum-shap/)
 # PyG-Captum-SHAPS
 
 A robust wrapper bridging the Euclidean sampling mechanisms of Captum with the non-Euclidean batching of PyTorch Geometric (PyG). Designed specifically for molecular QSAR modelling.
