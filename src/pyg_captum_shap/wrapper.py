@@ -10,36 +10,32 @@ class PyGCaptumWrapper(torch.nn.Module):
         super().__init__()
         self.model = model
 
-    def forward(self, inputs, graph_dict):
-        B, N, F = inputs.shape
-        x = inputs.view(-1, F) 
-
+    def forward(self, node_inputs, edge_inputs, global_inputs, graph_dict):
+        B, N, F = node_inputs.shape
+        x = node_inputs.view(-1, F)
+        
+        # Handle edge attributes 
+        batched_edge_attr = None
+        if edge_inputs is not None:
+            # Flatten [B, E, Ef] -> [B*E, Ef]
+            batched_edge_attr = edge_inputs.view(-1, edge_inputs.shape[-1])
+        
+        # Reconstruct block-diagonal edge_index
         edge_index = graph_dict['edge_index']
-        edge_attr = graph_dict.get('edge_attr')
-        global_features = graph_dict.get('global_features')
+        # Pre-calculate indices for efficiency
+        offsets = torch.arange(B, device=node_inputs.device).view(-1, 1, 1) * N
+        batched_edge_index = (edge_index.unsqueeze(0) + offsets).transpose(0, 1).reshape(2, -1)
 
-        batch = torch.arange(B, device=inputs.device).repeat_interleave(N)
+        # Create batch vector
+        batch_vec = torch.arange(B, device=node_inputs.device).repeat_interleave(N)
 
-        edge_indices = []
-        for i in range(B):
-            edge_indices.append(edge_index + i * N)
-        batched_edge_index = torch.cat(edge_indices, dim=1) if B > 0 else edge_index
-
-        if edge_attr is not None:
-            batched_edge_attr = edge_attr.repeat(B, 1) if edge_attr.dim() > 1 else edge_attr.repeat(B)
-        else:
-            batched_edge_attr = None
-
-        if global_features is not None:
-            batched_global = global_features.repeat(B, 1) if global_features.dim() > 1 else global_features.repeat(B)
-        else:
-            batched_global = None
-
+        # Global Features are already [B, G], no flattening needed
+        # Pass them as-is. If they are None, the model handles it.
         return self.model(
             x=x, 
             edge_index=batched_edge_index, 
-            batch=batch, 
+            batch=batch_vec, 
             edge_attr=batched_edge_attr, 
-            global_features=batched_global, 
+            global_features=global_inputs, 
             apply_embedding=False
         )

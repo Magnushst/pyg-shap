@@ -2,5 +2,5 @@
 from .wrapper import PyGCaptumWrapper
 from .explainer import compute_shap_values
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 __all__ = ["PyGCaptumWrapper", "compute_shap_values"]
