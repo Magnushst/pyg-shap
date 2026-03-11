@@ -9,7 +9,6 @@ authors = [
   { name="Magnus Stroemme", email="magnus.henrik@hotmail.com" },
 ]
 description = "A robust SHAP explainer wrapper for PyTorch Geometric models."
-License = "MIT License Copyright (c) 2026 Magnus Stroemme"
 readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
