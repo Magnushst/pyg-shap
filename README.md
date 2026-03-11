@@ -5,3 +5,5 @@ A robust wrapper bridging the Euclidean sampling mechanisms of Captum with the n
 ## Installation
 ```bash
 pip install pyg-captum-shap
+
+This library is built on top of the Captum library by PyTorch.
