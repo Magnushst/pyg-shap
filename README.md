@@ -14,6 +14,7 @@ pip install pyg-captum-shap
 ```
 
 ## Quick Start
+```python
 from pyg_captum_shap import compute_gat_shap_values
 
 # Extract SHAP values for a specific molecule and task
@@ -24,6 +25,7 @@ node_attributions = compute_gat_shap_values(
 )
 
 # node_attributions now contains the importance score for every atom in the graph
+```
 
 ## License
 Distributed under the MIT License.
